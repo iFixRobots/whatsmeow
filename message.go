@@ -629,6 +629,7 @@ func (cli *Client) decryptDM(ctx context.Context, child *waBinary.Node, from typ
 			return nil, nil, fmt.Errorf("failed to decrypt normal message: %w", err)
 		}
 	}
+	cli.logUnknownSignalFields(from, isPreKey, content, child)
 	var err error
 	plaintext, err = unpadMessage(plaintext, child.AttrGetter().Int("v"))
 	if err != nil {
